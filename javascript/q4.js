@@ -1,8 +1,35 @@
-let temp;
+let b=[2,5,7,9,6,8,1,3,4];
 
-function SortArray(a)
+class SortArray
 
 {
+
+ constructor()
+ {
+
+    
+ }
+
+
+SortArray(a)
+
+{
+
+  Object.defineProperty(SortArray,'a',
+
+  {
+
+    get : function()
+
+    {
+
+     return this.a;
+
+    }
+
+  });
+
+   let temp;
 
    for(let i=0;i<a.length;i++)
 
@@ -18,9 +45,7 @@ function SortArray(a)
 
         temp=a[i];
 
-
         a[i]=a[j];
-
 
         a[j]=temp;
 
@@ -30,27 +55,13 @@ function SortArray(a)
 
   }
 
+  
   console.log(a);
 
-}
-
-function GetSortArray()
-
-{
-
-  let b = [4,5,6,2,7,3,9,1,0];
-
-  SortArray(b);
+ }
 
 }
 
-
-GetSortArray();
-
-
-function SortObjectArray()
-
-{
 
 let o = [
   {
@@ -64,23 +75,44 @@ let o = [
   }
   ]
 
-let p=[];
 
-  for(let i=0;i<o.length;i++)
 
+
+class SortObjectArray extends SortArray
+
+{
+
+  constructor()
   {
 
-   p[i]=o[i].num;
+    super();
 
   }
 
-  SortArray(p);
-
-  let tem;
-
-  for(let i=0;i<o.length;i++)
-
+  SortObjectArray(o)
   {
+
+
+   let p=[];
+
+
+   for(let i=0;i<o.length;i++)
+
+   {
+
+   p[i]=o[i].num;
+
+   }
+
+   new SortArray(p);
+
+   let tem;
+
+   for(let i=0;i<o.length;i++)
+
+
+   {
+
 
     for(let j=0;j<o.length;j++)
 
@@ -98,12 +130,25 @@ let p=[];
 
       }
 
+     }
+
     }
 
-  }
 
   console.log(o)
 
+ }
+
 }
 
-SortObjectArray();
+let m=new SortArray();
+
+let s=m.SortArray(b);
+
+console.log(s);
+
+let n=new SortObjectArray();
+
+let l=n.SortObjectArray(o);
+
+console.log(l);
