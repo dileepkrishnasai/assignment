@@ -4,83 +4,77 @@ class SortArray
 
 {
 
- constructor()
+ constructor(a,sort)
  {
-   
+
+   this.a=a;
+
+   this.sort = function(a)
+   {
+
+     for(let i=0;i<a.length;i++)
+
+     {
+
+       for(let j=0;j<a.length;j++)
+
+       {
+
+         if(a[i]<a[j])
+
+         {
+
+           a[i]=a[i]+a[j];
+
+           a[j]=a[i]-a[j];
+
+           a[i]=a[i]-a[j];
+
+         }
+
+       }
+
+     }
+
+     return a;
+
+   }
+
  }
 
- getSortedArray()
-
+ 
+SortArray(OriginalArray)
  {
 
-    Object.defineProperty(SortArray,'a',
+   let a=this.sort(OriginalArray);
 
-    {
+   Object.defineProperty(SortArray,'a',
+
+   {
 
       get : function()
 
      {
 
-      return this.a;
+      return a;
 
      }
 
-
     });
 
- }
-
-SortArray(a)
-
-{
-
-   let temp;
-
-
-   for(let i=0;i<a.length;i++)
-
-   {
-
-    for(let j=i;j<a.length;j++)
-
-    {
-
-      if(a[i] >a[j])
-
-      {
-
-        temp=a[i];
-
-
-        a[i]=a[j]; 
-
-
-        a[j]=temp;
-
-
-      }
-
-
-    }
-
+    return a;
 
   }
-
-  return a;
-
- }
-
 
 }
 
 
-
 let o = [
   {
-    num : 5
+  num : 5
   },
   {
-    num : 3
+  num : 3
   },
   {
     num : 7
@@ -88,19 +82,19 @@ let o = [
   ]
 
 
+
 class SortObjectArray extends SortArray
+
 
 {
 
-  constructor()
+  constructor(a,sort)
 
   {
 
-    super();
-
+    super(a,sort);
 
   }
-
 
   SortObjectArray(o)
 
@@ -108,21 +102,21 @@ class SortObjectArray extends SortArray
 
    let p=[];
 
-
-
    for(let i=0;i<o.length;i++)
 
    {
 
+
    p[i]=o[i].num;
+
 
    }
 
-    let z=new SortArray();
+   p=this.sort(p);
 
-    p=z.SortArray(p);
+   
+let tem;
 
-    let tem;
 
    for(let i=0;i<o.length;i++)
 
@@ -156,16 +150,19 @@ class SortObjectArray extends SortArray
 
 }
 
-
 let n=new SortObjectArray();
 
 
 let l=n.SortObjectArray(o);
 
 
-let s=n.SortArray(b);
+let m=new SortArray();
+
+
+let s=m.SortArray(b);
 
 
 console.log(s);
+
 
 console.log(l);
