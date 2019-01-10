@@ -92,11 +92,11 @@ class SortObjectArray extends SortArray
 
 {
 
-  constructor(a)
+  constructor()
 
   {
 
-    super(a);
+    super();
 
 
   }
