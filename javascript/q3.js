@@ -46,7 +46,7 @@ let C = [];
 let j=0;k=0;l=0;
 
 
-function GroupObjectsBy()
+function GroupObjectsBy(group,channel)
  {
 
 
@@ -122,4 +122,4 @@ console.log(will_return);
 }
 
 
-GroupObjectsBy();
+GroupObjectsBy(group,'channel');

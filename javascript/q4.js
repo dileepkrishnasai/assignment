@@ -6,30 +6,36 @@ class SortArray
 
  constructor()
  {
-
-    
+   
  }
 
+ getSortedArray()
+
+ {
+
+    Object.defineProperty(SortArray,'a',
+
+    {
+
+      get : function()
+
+     {
+
+      return this.a;
+
+     }
+
+
+    });
+
+ }
 
 SortArray(a)
 
 {
 
-  Object.defineProperty(SortArray,'a',
-
-  {
-
-    get : function()
-
-    {
-
-     return this.a;
-
-    }
-
-  });
-
    let temp;
+
 
    for(let i=0;i<a.length;i++)
 
@@ -45,22 +51,28 @@ SortArray(a)
 
         temp=a[i];
 
-        a[i]=a[j];
+
+        a[i]=a[j]; 
+
 
         a[j]=temp;
 
+
       }
+
 
     }
 
+
   }
 
-  
-  console.log(a);
+  return a;
 
  }
 
+
 }
+
 
 
 let o = [
@@ -76,24 +88,26 @@ let o = [
   ]
 
 
-
-
 class SortObjectArray extends SortArray
 
 {
 
-  constructor()
+  constructor(a)
+
   {
 
-    super();
+    super(a);
+
 
   }
 
+
   SortObjectArray(o)
+
   {
 
-
    let p=[];
+
 
 
    for(let i=0;i<o.length;i++)
@@ -104,15 +118,15 @@ class SortObjectArray extends SortArray
 
    }
 
-   new SortArray(p);
+    let z=new SortArray();
 
-   let tem;
+    p=z.SortArray(p);
+
+    let tem;
 
    for(let i=0;i<o.length;i++)
 
-
    {
-
 
     for(let j=0;j<o.length;j++)
 
@@ -124,7 +138,9 @@ class SortObjectArray extends SortArray
 
         tem=o[i];
 
+
         o[i]=o[j];
+
 
         o[j]=tem;
 
@@ -134,21 +150,22 @@ class SortObjectArray extends SortArray
 
     }
 
-
-  console.log(o)
+    return o;
 
  }
 
 }
 
-let m=new SortArray();
-
-let s=m.SortArray(b);
-
-console.log(s);
 
 let n=new SortObjectArray();
 
+
 let l=n.SortObjectArray(o);
+
+
+let s=n.SortArray(b);
+
+
+console.log(s);
 
 console.log(l);
