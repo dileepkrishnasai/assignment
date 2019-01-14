@@ -16,29 +16,21 @@ let im=['http://sousmonarbre.com/qphj/bd963843d2239ed78aa6f7b0a36b537d/qdp/shape
 'https://i.ytimg.com/vi/O5u1apUkYV0/maxresdefault.jpg',
 'https://media.glassdoor.com/l/e9/c1/7a/84/independence-day-celebration.jpg']
 
+if(!(fs.existsSync(dir+[j])))
+{
+ let x=im.length/5;
+  for(let i=0;i<=x;i++){
+    fs.mkdirSync(dir+[i]);}
+}
+
 
 for(let i=0;i<im.length;i++){
 
-if(!fs.existsSync(dir+[j]))
-   {
-    fs.mkdirSync(dir+[j]);
-   }
-else
-{
- fs.readdir(dir+[j],(err,files) =>{
-   console.log(files.length);
-    if(files.length>5 && !fs.existsSync(dir+[j+1]))
-   {
-     j++;
-     fs.mkdirSync(dir+[j]);
-   }
-  })
+ 
   if(i % 5 === 0 && i != 0) 
  {
   j++;
  }
-}
-
 
 request(im[i],function(err,data){
  if(err)
@@ -47,5 +39,5 @@ request(im[i],function(err,data){
    if(err)
      throw err;
  }));
+ console.log(i);
 }
-
