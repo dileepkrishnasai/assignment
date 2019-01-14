@@ -4,6 +4,17 @@ let parse=require("xml2js");
 let util=require("util");
 let ps=new parse.Parser();
 
+
+(function(parseWrapCopy) {
+  parse.wrap = function(script) {
+    script = "console.log('debug');" + script
+    return parseWrapCopy(script); // Call original wrapper function
+  };
+}(parse.wrap)); // Pass original function to IIFE
+
+require("./q1.js");
+
+
 let file='q1';
 
 class xmlf
