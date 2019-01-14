@@ -5,7 +5,7 @@ let csvwriter=require("csv-writer").createObjectCsvWriter;
 
 let csvw=csvwriter({
  path:'./file.csv',
- header:[]
+ header:['link']
  });
 
 
@@ -22,9 +22,12 @@ let arr=['http://sousmonarbre.com/qphj/bd963843d2239ed78aa6f7b0a36b537d/qdp/shap
 for(let i=0;i<arr.length;i++)
 {
  shorturl.short(arr[i],function(err,data){
+  if(err)
+   throw err;
  console.log(data);
- csvw.writeRecords(data);
  });
-
-csvw.writeRecords(arr[i]);
 }
+csvw.writeRecords(arr)
+.then(()=>{
+console.log("..done");
+});
