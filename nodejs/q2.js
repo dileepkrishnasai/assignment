@@ -1,19 +1,20 @@
-let Handlebars = require("handlebars");
-let xml2js=require("xml2js");
-let fs=require("fs");
-let request=require("request");
+let handlebars = require("handlebars");
 
 
 let inp=[
   {
     "baseId": "1",
     "feature": {
-         "value": "parent",
-         "value": "first entry"
+      "1": "parent",
+      "2": "first entry"
     },
     "contentType": {
-        "value": "pure",
+      "1": {
+        "value": "pure"
+      },
+      "2": {
         "value": "mix"
+      }
     },
     "isActive": true,
     "childProducts": [
@@ -33,14 +34,13 @@ let inp=[
         "baseId": "1-4",
         "isActive": true,
         "feature": {
-          
-           "value": "parent",
-           "value": "first entry"
+          "1": "parent",
+          "2": "first entry"
         },
         "searchTerms": {
-          "value": "glue",
-          "value": "adhesive",
-          "value": "stick"
+          "0": "glue",
+          "1": "adhesive",
+          "2": "stick"
         }
       }
     ]
@@ -49,16 +49,16 @@ let inp=[
     "baseId": "10",
     "isActive": true,
     "searchTerms": {
-      "value": "glue",
-      "value": "adhesive",
-      "value": "stick"
+      "0": "glue",
+      "1": "adhesive",
+      "2": "stick"
     },
     "childProducts": [
       {
         "baseId": "10-1",
         "isActive": true,
         "searchTerms": {
-          "value": "glue"
+          "0": "glue"
         }
       },
       {
@@ -77,15 +77,54 @@ let inp=[
   }
 ]
 
-let s="<products><product><baseId>{{baseId}}</baseId><isActive>{{isActive}}</isActive>"+
-"<contentType>{{#contentType}}<contentTypeValue>{{value}}</contentTypeValue></contentType>"+
-"<features>{{#feature}}<feature>{{value}}</feature></features>"+
-"<searchTerms>{{#searchTerms}}<searchTermValue>{{value}}</searchTermValue></searchTerms>"+
-"<childProducts><childProduct>{{#childProducts}}<baseId>{{baseId}}</baseId>"+
-"<isActive>{{isActive}}</isActive><features>{{#features}}<feature>{{value}}</feature></features>"+
-"<searchTerms>{{#searchTerms}}<searchTermValue>{{value}}</searchTermValue></searchTerms></childProduct>"+
-"<childProduct>{{#childProduct}}<baseId>{{baseId}}</baseId><isActive>{{isActive}}</isActive>"+
-"<searchTerms>{{#searchTerms}}<searchTermValue>{{value}}</searchTermValue></searchTerms></childProducts></product></products>";
 
-let temp=Handlebars.compile(s);
+let s="<products>"+
+   "<product>"+
+       "<baseId>{{baseId}}</baseId>"+
+       "<isActive>{{isActive}}</isActive>"+
+       "<contentType>{{#contentType}}"+
+           "<contentTypeValue>{{value}}</contentTypeValue>"+
+       "</contentType>"+
+       "<features>{{#feature}}"+
+           "<feature>{{#each feature}}</feature>"+
+       "</features>"+
+       "<searchTerms>{{#searchTerms}}"+
+           "<searchTermValue>{{#each searchTerms}}</searchTermValue>"+
+       "</searchTerms>"+
+       "<childProducts>"+
+           "<childProduct>{{#childProducts}}"+
+               "<baseId>{{baseId}}</baseId>"+
+               "<isActive>{{isActive}}</isActive>"+
+               "<features>{{#feature}}"+
+                   "<feature>{{#each feature}}</feature>"+
+               "</features>"+
+               "<searchTerms>{{#searchTerms}}"+
+                   "<searchTermValue>{{#each searchTerms}}</searchTermValue>"+
+               "</searchTerms>"+
+           "</childProduct>"+
+           "<childProduct>{{#childProducts}}"+
+               "<baseId>{{baseId}}</baseId>"+
+               "<isActive>{{isActive}}</isActive>"+
+               "<features>{{#feature}}"+
+                   "<feature>{{#each feature}}</feature>"+
+               "</features>"+
+               "<searchTerms>{{#searchTerms}}"+
+                   "<searchTermValue>{{#each searchTerms}}</searchTermValue>"+
+               "</searchTerms>"+
+           "</childProduct>"+
+           "<childProduct>{{#childProducts}}"+
+               "<baseId>{{baseId}}</baseId>"+
+               "<isActive>{{isActive}}</isActive>"+
+               "<features>{{#feature}}"+
+                   "<feature>{{#each feature}}</feature>"+
+               "</features>"+
+               "<searchTerms>{{#searchTerms}}"+
+                   "<searchTermValue>{{#each searchTerms}}</searchTermValue>"+
+               "</searchTerms>"+
+           "</childProduct>"+
+       "</childProducts>"+
+   "</product>"+
+"</products>";
+
+let temp=handlebars.compile(s);
 let r=temp(inp);
